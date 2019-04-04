@@ -1,3 +1,4 @@
-#### Footer col 3
+#### Om Kursen
 
-Med brödtext i ett stycke som säger något trevligt om just detta block, eller kanske en lista av länkar.
+Denna kurs är en del utav programmet Webbprogramming som
+undervisas på Blekinge Tekniska Högskola.

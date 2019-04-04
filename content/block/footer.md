@@ -1,1 +1,3 @@
-Copyright år och ditt namn samt diverse länkar som du finner relevanta.
+Copyright © 2019 Emelie Åslund
+
+[GitHub](https://github.com/theEmelie/oophp-v5)

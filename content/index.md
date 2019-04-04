@@ -1,27 +1,14 @@
 ---
 title: "Min fina titel"
 ---
-Min me-sida i kursen oophp
+Min me-sida i kursen oophp.
 =========================
 
-Detta innehåll är skrivet i markdown och du hittar innehållet i filen `content/index.md`.
 
-[FIGURE src="image/me.jpg?w=400&a=4,27,11,0&cf&sharpen" class="right" caption="Bild på mig, ätandes glass och hållandes ett kort på någon jultillställning."]
+[FIGURE src="image/emelie.jpg?h=200&crop-to-fit&q=100" class="right" caption="Bild på mig på Kolmården"]
 
-Detta är min me-sida i kursen. Denna sidan innehåller en presentation av mig själv. Underhåll denna sidan under hela kursen och uppdatera den efter hand och behov.
+Mitt namn är Emelie Åslund. Jag är 24år gammal. Född och uppvuxen i Ekerö, Stockholm. Jag gick på NTI-Gymnasiet där jag studerade spelprogrammering. För tillfället studerar jag samtidigt som jag jobbar på Lidl, där jag har jobbat sen 2013.
 
-Så, en presentation en bra början. Skriv några ord om dig själv. Jag börjar.
+Jag valde att jobba efter gymnasiet då jag behövde en paus från att plugga, sen blev det lite längre än planerat. Jag har varit intresserad utav programmering sen ung ålder. Kan ha att göra med att jag älskar datorer. Spenderar många timmar vid datorn och spelar spel för det mesta. Förutom datorer så är ett stort intresse för mig hundar och scrapbooking.
 
-Mitt namn är Mikael Roos. Född och uppvuxen i Bankeryd, Småland, strax utanför Jönköping, i ett villaområde som byggdes upp samtidigt som vi flyttade in där. Jag gillade landhockey och har spelat bandy och hockey samt gått bowlinggymnasiet i Nässjö. Jag har varit städare, diskare, kallskänka, servitör och kock. På ett bananskal landade jag i Ronneby när jag började högskolan 1990 där och nu är jag kvar med fru, barn och så vidare.
-
-Programmering har alltid intresserat mig sedan 13-årsåldern och min första dator var en Spectravideo 328 med bandspelare.
-
-Om jag skall nämna någon hobby, förutom webbprogrammering, så får det bli att bära sten på sommarstugetomten, och det finns sten så det räcker och blir över.
-
-Till och från får jag för mig att börja på lite hobbies, ett år satsade jag på pokerspel, ett annat år var det geocaching, sedan turfing och nu på sistone verkar släktforskning lite spännande. Annars kan jag alltid koda på något av mina opensource-projekt, det finns och blir över.
-
-Vill du läsa mer om vad jag jobbat med så kan du kika på min [Linkedin-profil](https://www.linkedin.com/in/pt90mr/).
-
-Vi syns och hörs i forum och chatt!
-
-/Mikael
+I oktober 2017 flyttade jag till England för att bo med min pojkvän. Jag bodde där i 4 månader innan vi tillsammans flyttade till Sverige igen, en dag hoppas jag på att kunna flytta tillbaka dit.
