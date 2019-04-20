@@ -20,6 +20,7 @@ return [
             "lang" => "sv",
             "stylesheets" => [
                 // Change here to set another default stylesheet
+                "css/oophp_v2.css",
                 "css/oophp_v1.min.css",
                 //"css/another.min.css",
             ],

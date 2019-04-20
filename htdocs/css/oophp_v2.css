@@ -1,0 +1,21 @@
+a {
+    color: white;
+    text-decoration: none;
+}
+
+pre {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    overflow: auto;
+    overflow-y: hidden;
+    font-size: 12px;
+    line-height: 20px;
+    color: white;
+    white-space: pre-wrap;
+}
+
+pre code {
+    padding: 10px;
+    color: #333;
+}
