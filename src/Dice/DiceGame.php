@@ -18,6 +18,7 @@ class DiceGame
     private $resultMessage = "";
     private $humanTurn = true;
     private $gameOver;
+    private $diceHistogram = "";
 
     public function __construct(int $numOfDice = 2, int $diceSides = 6, int $maxScore = 100)
     {
@@ -66,7 +67,8 @@ class DiceGame
             "resultMessage" => $this->resultMessage,
             "humanTurn" => $this->humanTurn,
             "inPlayerTurn" => $this->inPlayerTurn,
-            "gameOver" => $this->gameOver
+            "gameOver" => $this->gameOver,
+            "diceHistogram" => $this->diceHistogram
         ];
         return $data;
     }
@@ -99,7 +101,7 @@ class DiceGame
 
     public function playRound()
     {
-        $this->currentRound = new DiceRound($this->numOfDice, $this->diceSides, $this->roundScore);
+        $this->currentRound = new DiceRoundHistogram($this->numOfDice, $this->diceSides, $this->roundScore);
         if ($this->inPlayerTurn == false) {
             $this->inPlayerTurn = true;
         }
@@ -110,6 +112,7 @@ class DiceGame
         } else {
             $this->resultMessage = "You scored " . $this->currentRound->getRoundScore() . " this round.";
         }
+        $this->diceHistogram = $this->currentRound->getAsText();
         return $roundOver;
     }
 
@@ -126,12 +129,12 @@ class DiceGame
 
     public function playAIround()
     {
-        $maxRisk = 9;
+        $maxRisk = 14;
         $diceRolls = "";
         $roundOver = false;
 
         $this->inPlayerTurn = false;
-        $this->currentRound = new DiceRound($this->numOfDice, $this->diceSides, 0);
+        $this->currentRound = new DiceRoundHistogram($this->numOfDice, $this->diceSides, 0);
 
         while ($this->currentRound->getRoundScore() < $maxRisk && !$roundOver) {
             $roundOver = $this->currentRound->roll();
@@ -144,6 +147,23 @@ class DiceGame
             $score = $this->playerScores[1] + $this->currentRound->getRoundScore();
             if ($score >= $this->maxScore) {
                 break;
+            }
+            // Adjust max risk depending on player score
+            if ($this->playerScores[0] < $this->playerScores[1]) {
+                // Computer ahead
+                $maxRisk = 10;
+            } elseif ($this->playerScores[0] > $this->playerScores[1]) {
+                // Player ahead
+                if (($this->maxScore - $this->playerScores[0]) < ($this->playerScores[0] - $this->playerScores[1])) {
+                    // Player is closer to winning than computer is to player
+                    $maxRisk = 20;
+                } else {
+                    // Player and computer are close together than player is too winning
+                    $maxRisk = 15;
+                }
+            } else {
+                // Same score
+                $maxRisk = 11;
             }
         }
         if ($roundOver) {
@@ -158,5 +178,6 @@ class DiceGame
         }
         $this->humanTurn = true;
         $this->checkWin();
+        $this->diceHistogram = $this->currentRound->getAsText();
     }
 }

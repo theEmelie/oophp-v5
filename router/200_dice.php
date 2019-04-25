@@ -3,10 +3,10 @@
  * Create routes using $app programming style.
  */
 //var_dump(array_keys(get_defined_vars()));
-function getDiceSessionData($session)
+function getDiceSessionData($app)
 {
-    if (array_key_exists('game', $session)) {
-        $game = unserialize($session['game']);
+    if ($app->session->has('game')) {
+        $game = unserialize($app->session->get('game'));
     } else {
         $game = null;
     }
@@ -16,10 +16,10 @@ function getDiceSessionData($session)
     return $data;
 }
 
-function setDiceSessionData($data)
+function setDiceSessionData($app, $data)
 {
     foreach ($data as $key => $value) {
-        $_SESSION[$key] = $value;
+        $app->session->set($key, $value);
     }
 }
 /**
@@ -35,7 +35,7 @@ $app->router->get("dice_game/init", function () use ($app) {
     $data = [
         "game" => serialize($game),
     ];
-    setDiceSessionData($data);
+    setDiceSessionData($app, $data);
 
     return $app->response->redirect("dice_game/play_dice");
 });
@@ -46,7 +46,7 @@ $app->router->get("dice_game/init", function () use ($app) {
 $app->router->get("dice_game/play_dice", function () use ($app) {
     $title = "Play the game";
 
-    $data = getDiceSessionData($_SESSION);
+    $data = getDiceSessionData($app);
     $game = $data["game"];
     $output = $game->getGameData();
 
@@ -60,7 +60,7 @@ $app->router->get("dice_game/play_dice", function () use ($app) {
         "game" => serialize($game),
     ];
 
-    setDiceSessionData($data);
+    setDiceSessionData($app, $data);
 
     return $app->page->render([
         "title" => $title,
@@ -71,13 +71,13 @@ $app->router->get("dice_game/play_dice", function () use ($app) {
  * Play the game - make a guess.
  */
 $app->router->post("dice_game/play_dice", function () use ($app) {
-    $data = getDiceSessionData($_SESSION);
+    $data = getDiceSessionData($app);
     $game = $data["game"];
 
-    $doRoll = $_POST["doRoll"] ?? null;
-    $doSave = $_POST["doSave"] ?? null;
-    $doReset = $_POST["doReset"] ?? null;
-    $doComputer = $_POST["doComputer"] ?? null;
+    $doRoll = $app->request->getPost("doRoll") ?? null;
+    $doSave = $app->request->getPost("doSave") ?? null;
+    $doReset = $app->request->getPost("doReset") ?? null;
+    $doComputer = $app->request->getPost("doComputer") ?? null;
 
     if ($doReset) {
         return $app->response->redirect("dice_game/init");
@@ -92,7 +92,7 @@ $app->router->post("dice_game/play_dice", function () use ($app) {
     $data = [
         "game" => serialize($game),
     ];
-    setDiceSessionData($data);
+    setDiceSessionData($app, $data);
 
     return $app->response->redirect("dice_game/play_dice");
 });

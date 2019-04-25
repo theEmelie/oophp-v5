@@ -79,7 +79,7 @@ $app->router->get("guess_game/play", function () use ($app) {
     ];
 
     $app->page->add("guess_game/play", $data);
-    $app->page->add("guess_game/debug");
+    // $app->page->add("guess_game/debug");
 
     setSessionData($data);
 

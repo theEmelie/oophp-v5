@@ -3,8 +3,8 @@ namespace Emau\Dice;
 
 class DiceRound
 {
-    private $hand;
-    private $roundScore;
+    protected $hand;
+    protected $roundScore;
 
     public function __construct(int $numOfDice = 2, int $diceSides = 6, int $roundScore = 0)
     {

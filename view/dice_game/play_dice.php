@@ -22,6 +22,7 @@ endforeach;
 <?php endif;?>
 <p><?= $resultMessage ?></p>
 
+<p><?= $diceHistogram ?></p>
 
 <form method="post">
     <?php if (!$gameOver) :?>
