@@ -25,7 +25,7 @@ function setDiceSessionData($app, $data)
 /**
  * Init the game and redirect to play the game.
  */
-$app->router->get("dice_game/init", function () use ($app) {
+$app->router->get("dice_game1/init", function () use ($app) {
     // Init the session for the game start.
     $numOfDice = 2;
     $diceSides = 6;
@@ -37,13 +37,13 @@ $app->router->get("dice_game/init", function () use ($app) {
     ];
     setDiceSessionData($app, $data);
 
-    return $app->response->redirect("dice_game/play_dice");
+    return $app->response->redirect("dice_game1/play_dice");
 });
 
 /**
  * Play the game - show game status.
  */
-$app->router->get("dice_game/play_dice", function () use ($app) {
+$app->router->get("dice_game1/play_dice", function () use ($app) {
     $title = "Play the game";
 
     $data = getDiceSessionData($app);
@@ -53,7 +53,7 @@ $app->router->get("dice_game/play_dice", function () use ($app) {
     // var_dump($output);
 
 
-    $app->page->add("dice_game/play_dice", $output);
+    $app->page->add("dice_game1/play_dice", $output);
     // $app->page->add("dice_game/debug");
 
     $data = [
@@ -70,7 +70,7 @@ $app->router->get("dice_game/play_dice", function () use ($app) {
 /**
  * Play the game - make a guess.
  */
-$app->router->post("dice_game/play_dice", function () use ($app) {
+$app->router->post("dice_game1/play_dice", function () use ($app) {
     $data = getDiceSessionData($app);
     $game = $data["game"];
 
@@ -80,7 +80,7 @@ $app->router->post("dice_game/play_dice", function () use ($app) {
     $doComputer = $app->request->getPost("doComputer") ?? null;
 
     if ($doReset) {
-        return $app->response->redirect("dice_game/init");
+        return $app->response->redirect("dice_game1/init");
     } elseif ($doRoll) {
         $status = $game->playRound();
     } elseif ($doSave) {
@@ -94,5 +94,5 @@ $app->router->post("dice_game/play_dice", function () use ($app) {
     ];
     setDiceSessionData($app, $data);
 
-    return $app->response->redirect("dice_game/play_dice");
+    return $app->response->redirect("dice_game1/play_dice");
 });

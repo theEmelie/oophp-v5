@@ -1,36 +1,26 @@
 <?php
-
-namespace Emau\DiceGameController;
-
-use Anax\Commons\ContainerInjectableInterface;
-use Anax\Commons\ContainerInjectableTrait;
-
+namespace Anax\Controller;
+use Anax\Commons\AppInjectableInterface;
+use Anax\Commons\AppInjectableTrait;
 // use Anax\Route\Exception\ForbiddenException;
 // use Anax\Route\Exception\NotFoundException;
 // use Anax\Route\Exception\InternalErrorException;
-
 /**
  * A sample controller to show how a controller class can be implemented.
- * The controller will be injected with $di if implementing the interface
- * ContainerInjectableInterface, like this sample class does.
+ * The controller will be injected with $app if implementing the interface
+ * AppInjectableInterface, like this sample class does.
  * The controller is mounted on a particular route and can then handle all
  * requests for that mount point.
  *
  * @SuppressWarnings(PHPMD.TooManyPublicMethods)
  */
-class SampleController implements ContainerInjectableInterface
+class SampleAppController implements AppInjectableInterface
 {
-    use ContainerInjectableTrait;
-
-
-
+    use AppInjectableTrait;
     /**
      * @var string $db a sample member variable that gets initialised
      */
     private $db = "not active";
-
-
-
     /**
      * The initialize method is optional and will always be called before the
      * target method/action. This is a convienient method where you could
@@ -42,28 +32,8 @@ class SampleController implements ContainerInjectableInterface
     {
         // Use to initialise member variables.
         $this->db = "active";
+        // Use $this->app to access the framework services.
     }
-
-    function getDiceSessionData($app)
-    {
-        if ($app->session->has('game')) {
-            $game = unserialize($app->session->get('game'));
-        } else {
-            $game = null;
-        }
-        $data = [
-            "game" => $game
-        ];
-        return $data;
-    }
-
-    function setDiceSessionData($app, $data)
-    {
-        foreach ($data as $key => $value) {
-            $app->session->set($key, $value);
-        }
-    }
-
     /**
      * This is the index method action, it handles:
      * ANY METHOD mountpoint
@@ -77,89 +47,18 @@ class SampleController implements ContainerInjectableInterface
         // Deal with the action and return a response.
         return __METHOD__ . ", \$db is {$this->db}";
     }
-
-    public function initAction() : string
-    {
-        // Init the session for the game start.
-        $numOfDice = 2;
-        $diceSides = 6;
-        $maxScore = 100;
-        $game = new Emau\Dice\DiceGame($numOfDice, $diceSides, $maxScore);
-        $game->rollToStart();
-        $data = [
-            "game" => serialize($game),
-        ];
-        setDiceSessionData($this->app, $data);
-        return $this->app->response->redirect("dice_game/play_dice");
-    }
-
-    public function playDiceAction() : string
-    {
-        $title = "Play the game";
-
-        $page = $this->app->page;
-        $session = $this->app->session;
-
-        $data = getDiceSessionData($app);
-        $game = $data["game"];
-        $output = $game->getGameData();
-
-        $page->add("dice_game/play_dice", $output);
-
-        $data = [
-            "game" => serialize($game),
-        ];
-
-        setDiceSessionData($app, $data);
-
-        return $page->render([
-            "title" => $title,
-        ]);
-    }
-
-    public function playDiceActionPost() : string
-    {
-        $app = $this->app
-        $data = getDiceSessionData($app);
-        $game = $data["game"];
-
-        $doRoll = $app->request->getPost("doRoll") ?? null;
-        $doSave = $app->request->getPost("doSave") ?? null;
-        $doReset = $app->request->getPost("doReset") ?? null;
-        $doComputer = $app->request->getPost("doComputer") ?? null;
-
-        if ($doReset) {
-            return $app->response->redirect("dice_game/init");
-        } elseif ($doRoll) {
-            $status = $game->playRound();
-        } elseif ($doSave) {
-            $game->endPlayerRound();
-        } elseif ($doComputer) {
-            $game->playAIround();
-        }
-
-        $data = [
-            "game" => serialize($game),
-        ];
-        setDiceSessionData($app, $data);
-
-        return $app->response->redirect("dice_game/play_dice");
-    }
     /**
-     * This sample method dumps the content of $di.
+     * This sample method dumps the content of $app.
      * GET mountpoint/dump-app
      *
      * @return string
      */
-    public function dumpDiActionGet() : string
+    public function dumpAppActionGet() : string
     {
         // Deal with the action and return a response.
-        $services = implode(", ", $this->di->getServices());
-        return __METHOD__ . "<p>\$di contains: $services";
+        $services = implode(", ", $this->app->getServices());
+        return __METHOD__ . "<p>\$app contains: $services";
     }
-
-
-
     /**
      * Add the request method to the method name to limit what request methods
      * the handler supports.
@@ -172,9 +71,6 @@ class SampleController implements ContainerInjectableInterface
         // Deal with the action and return a response.
         return __METHOD__ . ", \$db is {$this->db}";
     }
-
-
-
     /**
      * This sample method action it the handler for route:
      * GET mountpoint/create
@@ -186,9 +82,6 @@ class SampleController implements ContainerInjectableInterface
         // Deal with the action and return a response.
         return __METHOD__ . ", \$db is {$this->db}";
     }
-
-
-
     /**
      * This sample method action it the handler for route:
      * POST mountpoint/create
@@ -200,9 +93,6 @@ class SampleController implements ContainerInjectableInterface
         // Deal with the action and return a response.
         return __METHOD__ . ", \$db is {$this->db}";
     }
-
-
-
     /**
      * This sample method action takes one argument:
      * GET mountpoint/argument/<value>
@@ -216,9 +106,6 @@ class SampleController implements ContainerInjectableInterface
         // Deal with the action and return a response.
         return __METHOD__ . ", \$db is {$this->db}, got argument '$value'";
     }
-
-
-
     /**
      * This sample method action takes zero or one argument and you can use - as a separator which will then be removed:
      * GET mountpoint/defaultargument/
@@ -235,9 +122,6 @@ class SampleController implements ContainerInjectableInterface
         // Deal with the action and return a response.
         return __METHOD__ . ", \$db is {$this->db}, got argument '$value'";
     }
-
-
-
     /**
      * This sample method action takes two typed arguments:
      * GET mountpoint/typed-argument/<string>/<int>
@@ -256,9 +140,6 @@ class SampleController implements ContainerInjectableInterface
         // Deal with the action and return a response.
         return __METHOD__ . ", \$db is {$this->db}, got string argument '$str' and int argument '$int'.";
     }
-
-
-
     /**
      * This sample method action takes a variadic list of arguments:
      * GET mountpoint/variadic/
@@ -276,12 +157,9 @@ class SampleController implements ContainerInjectableInterface
         // Deal with the action and return a response.
         return __METHOD__ . ", \$db is {$this->db}, got '" . count($value) . "' arguments: " . implode(", ", $value);
     }
-
-
-
     /**
      * Adding an optional catchAll() method will catch all actions sent to the
-     * router. YOu can then reply with an actual response or return void to
+     * router. You can then reply with an actual response or return void to
      * allow for the router to move on to next handler.
      * A catchAll() handles the following, if a specific action method is not
      * created:

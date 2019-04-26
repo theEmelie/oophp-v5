@@ -5,9 +5,9 @@
 return [
     "routes" => [
         [
-            "info" => "Dice 100 game.",
-            "mount" => "dice_game",
-            "handler" => "\Emau\Controller\DiceGameController",
+            "info" => "Development and debugging information.",
+            "mount" => "dev",
+            "handler" => "\Anax\Controller\DevelopmentController",
         ],
     ]
 ];
