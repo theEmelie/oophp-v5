@@ -3,7 +3,7 @@ Tärningsspel 100
 
 Välkommen till Tärningsspelet 100!
 
-[Starta ett nytt spel!](dice_game/init)
+[Starta ett nytt spel!](play_dice/init)
 
 Spelregler och spelrunda:
 ----------------

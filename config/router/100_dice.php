@@ -6,7 +6,7 @@ return [
     "routes" => [
         [
             "info" => "Dice Controller.",
-            "mount" => "dice1",
+            "mount" => "play_dice",
             "handler" => "\Emau\Dice\DiceController",
         ],
     ]

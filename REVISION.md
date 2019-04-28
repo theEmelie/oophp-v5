@@ -11,3 +11,7 @@ v2.0.0* (2019-04-12)
 v3.0.0* (2019-04-20)
 ---------------------
 * Finished with kmom03, making dice game 100 and unit tests.
+
+v4.0.0* (2019-04-28)
+---------------------
+* Finished with kmom04, moving dice to controller and adding better AI.

@@ -3,6 +3,7 @@ namespace Emau\Dice;
 
 use Anax\Commons\AppInjectableInterface;
 use Anax\Commons\AppInjectableTrait;
+
 // use Anax\Route\Exception\ForbiddenException;
 // use Anax\Route\Exception\NotFoundException;
 // use Anax\Route\Exception\InternalErrorException;
@@ -46,13 +47,13 @@ class DiceController implements AppInjectableInterface
     public function indexAction() : string
     {
         // Deal with the action and return a response.
-        return "Index";
+        return "active";
     }
 
-    function getDiceSessionData($app)
+    public function getDiceSessionData()
     {
         if ($this->app->session->has('game')) {
-            $game = unserialize($app->session->get('game'));
+            $game = unserialize($this->app->session->get('game'));
         } else {
             $game = null;
         }
@@ -62,7 +63,7 @@ class DiceController implements AppInjectableInterface
         return $data;
     }
 
-    function setDiceSessionData($app, $data)
+    public function setDiceSessionData($data)
     {
         foreach ($data as $key => $value) {
             $this->app->session->set($key, $value);
@@ -79,7 +80,7 @@ class DiceController implements AppInjectableInterface
         $data = [
             "game" => serialize($game),
         ];
-        setDiceSessionData($this->app, $data);
+        $this->setDiceSessionData($data);
 
         return $this->app->response->redirect("dice_game1/play_dice");
     }
@@ -88,7 +89,7 @@ class DiceController implements AppInjectableInterface
     {
         $title = "Play the game";
 
-        $data = getDiceSessionData($this->app);
+        $data = $this->getDiceSessionData();
         $game = $data["game"];
         $output = $game->getGameData();
 
@@ -102,7 +103,7 @@ class DiceController implements AppInjectableInterface
             "game" => serialize($game),
         ];
 
-        setDiceSessionData($this->app, $data);
+        $this->setDiceSessionData($data);
 
         return $this->app->page->render([
             "title" => $title,
@@ -111,7 +112,7 @@ class DiceController implements AppInjectableInterface
 
     public function playActionPost()
     {
-        $data = getDiceSessionData($this->app);
+        $data = $this->getDiceSessionData();
         $game = $data["game"];
 
         $doRoll = $this->app->request->getPost("doRoll") ?? null;
@@ -122,7 +123,7 @@ class DiceController implements AppInjectableInterface
         if ($doReset) {
             return $app->response->redirect("dice_game1/init");
         } elseif ($doRoll) {
-            $status = $game->playRound();
+            $game->playRound();
         } elseif ($doSave) {
             $game->endPlayerRound();
         } elseif ($doComputer) {
@@ -132,9 +133,8 @@ class DiceController implements AppInjectableInterface
         $data = [
             "game" => serialize($game),
         ];
-        setDiceSessionData($this->app, $data);
+        $this->setDiceSessionData($data);
 
         return $this->app->response->redirect("dice_game1/play_dice");
     }
-
 }
