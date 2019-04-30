@@ -1,18 +1,15 @@
---
--- Setup for the article:
--- https://dbwebb.se/kunskap/kom-igang-med-php-pdo-och-mysql
---
-
---
--- Create the database with a testuser
---
--- CREATE DATABASE IF NOT EXISTS oophp;
 -- GRANT ALL ON oophp.* TO user@localhost IDENTIFIED BY "pass";
--- USE oophp;
+-- Create the user 'user' with a backward compatible password algorithm
+-- and the password 'pass'
+CREATE USER IF NOT EXISTS 'user'@'%'
+    IDENTIFIED WITH mysql_native_password
+    BY 'pass'
+;
+CREATE DATABASE IF NOT EXISTS oophp;
+USE oophp;
 
--- Ensure UTF8 as chacrter encoding within connection.
+-- Ensure its UTF8 on the database connection
 SET NAMES utf8;
-
 
 --
 -- Create table for my own movie database

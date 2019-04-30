@@ -19,3 +19,34 @@ pre code {
     padding: 10px;
     color: #333;
 }
+
+img.thumb {
+    max-width: 100px;
+    max-height: 100px;
+}
+
+table {
+    margin-top: 1.5em;
+    margin-bottom: 1em;
+    border: 1px solid #ccc;
+    padding: 0.5em;
+    color: #f0f0f0;
+}
+
+tr.first {
+    background-color: cadetblue;
+}
+
+tr:hover {
+    background-color: cadetblue;
+}
+
+th {
+    font-weight: bold;
+    border-bottom: 1px solid cadetblue;
+}
+
+th,
+td {
+    padding: 7px;
+}
