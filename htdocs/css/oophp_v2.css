@@ -50,3 +50,17 @@ th,
 td {
     padding: 7px;
 }
+
+.movieNav {
+    color: #b8b897;
+    margin-top: 10px;
+    border-bottom: 1px solid cadetblue;
+}
+
+legend {
+    color: #b8b897;
+}
+
+li, ul {
+    color: white;
+}

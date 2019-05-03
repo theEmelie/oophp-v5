@@ -15,3 +15,7 @@ v3.0.0* (2019-04-20)
 v4.0.0* (2019-04-28)
 ---------------------
 * Finished with kmom04, moving dice to controller and adding better AI.
+
+v5.0.0* (2019-05-03)
+---------------------
+* Finished with kmom05, moving movie to framwork.
