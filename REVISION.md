@@ -19,3 +19,7 @@ v4.0.0* (2019-04-28)
 v5.0.0* (2019-05-03)
 ---------------------
 * Finished with kmom05, moving movie to framwork.
+
+v6.0.0* (2019-05-10)
+---------------------
+* Finished with kmom06, adding content and textfilters.

@@ -98,5 +98,15 @@ return [
             "url" => "movie_first/init",
             "title" => "Se olika filmtitlar.",
         ],
+        [
+            "text" => "Textfilter",
+            "url" => "textfilter",
+            "title" => "Testa olika textfilter.",
+        ],
+        [
+            "text" => "Blog",
+            "url" => "blog",
+            "title" => "Se olika blogg inlägg.",
+        ],
     ],
 ];

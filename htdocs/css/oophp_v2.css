@@ -3,8 +3,8 @@ a {
     text-decoration: none;
 }
 
-pre {
-    width: 100%;
+/* pre {
+    width: 25em;
     padding: 0;
     margin: 0;
     overflow: auto;
@@ -18,7 +18,7 @@ pre {
 pre code {
     padding: 10px;
     color: #333;
-}
+} */
 
 img.thumb {
     max-width: 100px;
@@ -63,4 +63,13 @@ legend {
 
 li, ul {
     color: white;
+}
+
+.deleted {
+    color: #aaa;
+}
+
+.error {
+    font-weight: bold;
+    color: #900;
 }

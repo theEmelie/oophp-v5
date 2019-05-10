@@ -99,5 +99,10 @@ return [
             "url" => "movie_first/init",
             "title" => "Se olika filmtitlar.",
         ],
+        [
+            "text" => "Textfilter",
+            "url" => "textfilter",
+            "title" => "Testa olika textfilter.",
+        ],
     ],
 ];
