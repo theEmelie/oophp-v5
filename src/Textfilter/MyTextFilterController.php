@@ -10,7 +10,7 @@ class MyTextFilterController implements AppInjectableInterface
 
     public function indexAction()
     {
-        $myTextFilter = new MyTextFilter();
+        $myTextFilter = new \Emau\TextFilter\MyTextFilter();
         $title = "Textfilter Test";
 
         $bbIn = "[b]Bold text[/b] [i]Italic text[/i] [url=http://dbwebb.se]a link to dbwebb[/url]

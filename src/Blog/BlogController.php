@@ -1,6 +1,7 @@
 <?php
 namespace Emau\Blog;
 
+use Emau\TextFilter;
 use Anax\Commons\AppInjectableInterface;
 use Anax\Commons\AppInjectableTrait;
 
@@ -44,7 +45,7 @@ class BlogController implements AppInjectableInterface
 
     public function runTextFilters($text, $filterString)
     {
-        $myTextFilter = new \Emau\TextFilter\MyTextFilter();
+        $myTextFilter = new Emau\TextFilter\MyTextFilter();
         $filterArray = explode(",", $filterString);
 
         foreach ($filterArray as $filter) {

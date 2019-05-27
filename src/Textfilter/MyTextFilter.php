@@ -1,5 +1,4 @@
 <?php
-
 namespace Emau\TextFilter;
 
 use \Michelf\Markdown;

@@ -23,3 +23,7 @@ v5.0.0* (2019-05-03)
 v6.0.0* (2019-05-10)
 ---------------------
 * Finished with kmom06, adding content and textfilters.
+
+v7.0.0* (2019-05-28)
+---------------------
+* Finished with kmom10 and oophp course.

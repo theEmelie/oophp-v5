@@ -5,9 +5,9 @@
 return [
     "routes" => [
         [
-            "info" => "Textfilter Controller.",
+            "info" => "TextFilter Controller.",
             "mount" => "textfilter",
-            "handler" => "\Emau\Textfilter\MyTextFilterController",
+            "handler" => "\Emau\TextFilter\MyTextFilterController",
         ],
     ]
 ];
